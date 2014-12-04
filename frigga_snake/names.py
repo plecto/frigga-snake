@@ -45,3 +45,6 @@ class Names(object):
         if label_matcher:
             return label_matcher.group(1)
         return None
+
+    def next_group_name(self):
+        return "%s-v%03d" % (self.cluster, (self.sequence + 1) if self.sequence is not None else 0)

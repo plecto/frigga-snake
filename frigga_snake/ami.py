@@ -8,8 +8,8 @@ class AMIName(object):
             return
         self.package_name = app_version_matcher.group(1)
         self.version = app_version_matcher.group(2)
-        self.build_number = "".join(app_version_matcher.group(3)[1:]) if app_version_matcher.group(3).startswith("h") else app_version_matcher.group(4)
-        self.commit = app_version_matcher.group(4) if app_version_matcher.group(3).startswith("h") else app_version_matcher.group(3)
+        self.build_number = "".join(app_version_matcher.group(3)[1:]) if app_version_matcher.group(3).startswith("h") and app_version_matcher.group(3) else app_version_matcher.group(4)
+        self.commit = app_version_matcher.group(4) if app_version_matcher.group(3).startswith("h") and app_version_matcher.group(3) else app_version_matcher.group(3)
         self.build_job_name = app_version_matcher.group(5)
 
     def __str__(self):
@@ -20,3 +20,6 @@ class AMIName(object):
             self.build_number,
             self.commit
         )
+
+    def __repr__(self):
+        return "<AMIName %s>" % str(self)
